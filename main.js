@@ -2,7 +2,7 @@ var router = new VueRouter();
 
 
 var mainComponent = Vue.extend({
-    components: {
+    components: {        
         'app-component': appComponent
     },
     template: '<app-component></app-component>',
@@ -29,6 +29,11 @@ router.map({
 
     '/bill/create': {
         name: 'bill.create',
+        component: billCreateComponent
+    },
+
+     '/bill/:index/update': {
+        name: 'bill.update',
         component: billCreateComponent
     },
 

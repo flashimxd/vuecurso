@@ -19,7 +19,6 @@ window.billCreateComponent = Vue.extend({
 
             <br/><br/>
             <input type="submit" value="Enviar"/>
-
         </form>
     `,
     data: function(){
@@ -42,6 +41,13 @@ window.billCreateComponent = Vue.extend({
             }
         }
     },
+    created: function(){
+
+        if(this.$route.name == 'bill.update'){
+            this.formType = 'update';
+            this.getBill(this.$route.params.index);
+        }
+    },
     methods: {
 
         submit: function(){
@@ -52,12 +58,11 @@ window.billCreateComponent = Vue.extend({
             this.bill =  { date_due: '', name: '', value: 0, done: 0 };
 
             this.$router.go({name: 'bill.list'});
+        },
+
+        getBill: function(index){
+            this.bill = this.$root.$children[0].bills[index];
         }
 
-    },
-    events: {
-        'change-bill': function(bill){
-            this.bill = bill;
-        }
     }
 });

@@ -28,7 +28,7 @@ window.billListComponent = Vue.extend({
                     <td>{{conta.value | currency 'R$ '}}</td> 
                     <td class="minha-classe" :class="{'pago' : conta.done, 'nao-pago': !conta.done}">{{conta.done | doneLabel }}</td>  
                     <td>
-                        <a href="#" @click.prevent="loadBill(conta)">Editar</a> | 
+                        <a v-link="{name: 'bill.update', params: { index: idx}}">Editar</a> | 
                         <a href="#" @click.prevent="deleteBill(conta)">Excluir</a>
                     </td>        
                 </tr>    
@@ -43,13 +43,9 @@ window.billListComponent = Vue.extend({
     },
     methods: {
 
-        loadBill: function(bill){
-            this.$dispatch('change-bill', bill);
-        },
-
         deleteBill: function(conta){
             if(confirm('Deseja excluir essa conta?')){
-                this.bills.$remove(conta);
+                this.$root.$children[0].bills.$remove(conta);
             }
         }
 
