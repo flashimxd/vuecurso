@@ -1,4 +1,4 @@
-window.billListComponent = Vue.extend({
+window.billPayListComponent = Vue.extend({
     template: `
     <style type="text/css">
                 .pago{
@@ -28,7 +28,7 @@ window.billListComponent = Vue.extend({
                     <td>{{conta.value | currency 'R$ '}}</td> 
                     <td class="minha-classe" :class="{'pago' : conta.done, 'nao-pago': !conta.done}">{{conta.done | doneLabel }}</td>  
                     <td>
-                        <a v-link="{name: 'bill.update', params: { index: idx}}">Editar</a> | 
+                        <a v-link="{name: 'bill-pay.update', params: { index: idx}}">Editar</a> | 
                         <a href="#" @click.prevent="deleteBill(conta)">Excluir</a>
                     </td>        
                 </tr>    
@@ -38,14 +38,14 @@ window.billListComponent = Vue.extend({
     `,
     data: function(){
         return {
-            bills: this.$root.$children[0].bills
+            bills: this.$root.$children[0].billsPay
         }
     },
     methods: {
 
         deleteBill: function(conta){
             if(confirm('Deseja excluir essa conta?')){
-                this.$root.$children[0].bills.$remove(conta);
+                this.$root.$children[0].billsPay.$remove(conta);
             }
         }
 

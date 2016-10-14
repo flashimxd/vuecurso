@@ -1,5 +1,5 @@
 
-window.billCreateComponent = Vue.extend({
+window.billPayCreateComponent = Vue.extend({
     template: `
         <form name="form" @submit.prevent="submit">
             <label>Vencimento:</label>
@@ -52,7 +52,7 @@ window.billCreateComponent = Vue.extend({
 
         submit: function(){
             if(this.formType == 'insert'){
-                this.$root.$children[0].bills.push(this.bill);
+                this.$root.$children[0].billsPay.push(this.bill);
             }
 
             this.bill =  { date_due: '', name: '', value: 0, done: 0 };
@@ -61,7 +61,7 @@ window.billCreateComponent = Vue.extend({
         },
 
         getBill: function(index){
-            this.bill = this.$root.$children[0].bills[index];
+            this.bill = this.$root.$children[0].billsPay[index];
         }
 
     }
