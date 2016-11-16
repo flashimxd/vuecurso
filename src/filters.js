@@ -5,7 +5,7 @@ Vue.filter('statusGeneral', (value) => {
     if(value === false){
         return "Nenhuma conta cadastrada";
     }
-    
+
     if(!value){
         return 'Nenhuma conta a pagar';
     }else{
@@ -24,7 +24,7 @@ Vue.filter("numberFormat", {
         }
 
         return new Intl.NumberFormat('pt-BR', {
-            minimumFractionDigits: 2, 
+            minimumFractionDigits: 2,
             maximumFractionDigits: 2,
             style: 'currency',
             currency: 'BRL'
@@ -36,7 +36,7 @@ Vue.filter("numberFormat", {
              number = value.replace(/[^\d\,]/g, '')
                 .replace(/\,/g,'.');
 
-            number = isNaN(number) ? 0 : parseFloat(number); 
+            number = isNaN(number) ? 0 : parseFloat(number);
          }
 
          return number;

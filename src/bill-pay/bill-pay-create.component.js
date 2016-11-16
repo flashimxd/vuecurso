@@ -11,9 +11,9 @@ window.billPayCreateComponent = Vue.extend({
                 <option v-for="name in names" :value="name">{{name}}</option>
             </select>
             <br/><br/>
-            <label>Valor:</label> 
+            <label>Valor:</label>
             <input type="text" v-model="bill.value | numberFormat">
-            
+
             <br/><br/>
             <label>Pago? </label>
             <input type="checkbox" v-model="bill.done"/>
@@ -26,12 +26,7 @@ window.billPayCreateComponent = Vue.extend({
         return {
             formType: 'insert',
             names: names,
-            bill: {
-                date_due: '',
-                name: '',
-                value: 0,
-                done: false
-            }
+            bill: new BillPay()
         }
     },
     created(){
@@ -45,9 +40,9 @@ window.billPayCreateComponent = Vue.extend({
 
         submit(){
 
-            var data = Vue.util.extend(this.bill, { date_due: this.getDueDate(this.bill.date_due)})
+            var data = this.bill.toJSON();
             if(this.formType == 'insert'){
-                
+
                 Bills.save({}, data).then((response) => {
                     this.$dispatch('change-info');
                     this.$router.go({name: 'bill-pay.list'});
@@ -63,19 +58,17 @@ window.billPayCreateComponent = Vue.extend({
 
         getBill(id){
             Bills.get({id: id}).then((response) => {
-                this.bill = response.data;
+                this.bill = new BillPay(response.data);
             })
         },
 
         getDueDate(date_due) {
 
-            //console.log(date_due); debugger;
             let dateDueObject = date_due;
             if(!(date_due instanceof Date)){
                 dateDueObject = new Date(date_due.split('/').reverse().join('-')+'T03:00:00');
             }
 
-           // console.log(dateDueObject.toISOString()); debugger;
             return dateDueObject.toISOString().split('T')[0];
         }
 
