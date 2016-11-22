@@ -22,12 +22,20 @@ window.billPayComponent = Vue.extend({
                 }
             </style>
 
-            <h1>{{title}}</h1>
+            <div class="section">
+                <div class="container">
+                    <h1>{{title}}</h1>
 
-            <h3 :class="{'gray' : status === false, 'green': status === 0, 'red': status > 0 }">{{status | statusGeneral}}</h3> 
+                    <h3 :class="{'gray' : status === false, 'green': status === 0, 'red': status > 0 }">{{status | statusGeneral}}</h3>
 
-            <h3>{{total | numberFormat}}</h3>
-            <menu-component></menu-component>
+                    <div class="row">
+                        <div class="col s5 offset-s7 z-depth-1">
+                            <h3>{{total | numberFormat}}</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
             <router-view></router-view>
         `,
@@ -55,7 +63,7 @@ window.billPayComponent = Vue.extend({
                 if(!bills[i].done){
                     count++;
                 }
-                
+
             }
 
             this.status =  count;
@@ -72,7 +80,7 @@ window.billPayComponent = Vue.extend({
                 this.total = response.data.total;
             })
         }
-       
+
     },
     events:{
         'change-info'(){
