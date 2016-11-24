@@ -9,7 +9,7 @@ Vue.filter('statusGeneral', (value) => {
     if(!value){
         return 'Nenhuma conta a pagar';
     }else{
-        return "Existem "+value+" contas a pagar!";
+        return value+" contas a pagar!";
     }
 
 });
