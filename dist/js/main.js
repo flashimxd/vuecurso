@@ -1,4 +1,6 @@
-let router = new VueRouter();
+'use strict';
+
+var router = new VueRouter();
 
 router.map({
 
@@ -18,7 +20,7 @@ router.map({
             '/:id/update': {
                 name: 'bill-pay.update',
                 component: billPayCreateComponent
-            },
+            }
         }
     },
     'bill-receives': {
@@ -31,8 +33,6 @@ router.map({
 
 });
 
-console.log("teste");
-
 router.start({
     components: {
         'bill-component': billComponent
@@ -41,4 +41,4 @@ router.start({
 
 router.redirect({
     '*': '/bill-pays'
-})
+});
